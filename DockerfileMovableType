@@ -1,0 +1,15 @@
+FROM ubuntu:16.10
+RUN useradd docker; sed -i 's/\/archive.ubuntu.com/\/jp.archive.ubuntu.com/g' /etc/apt/sources.list; apt update; apt -y dist-upgrade
+RUN apt -y install build-essential libimager-perl libimage-magick-perl libdbd-mysql-perl libipc-run-perl libcrypt-dsa-perl libxml-sax-expatxs-perl libxml-sax-perl libarchive-zip-perl libcoro-perl cpanminus starman
+RUN cpanm Mozilla::CA
+RUN cpanm Task::Plack
+RUN cpanm XMLRPC::Transport::HTTP::Plack
+
+ARG UID_MIN
+ARG GID_MIN
+RUN sed -i -e "s|^UID_MIN.*$|UID_MIN $UID_MIN|" /etc/login.defs
+RUN sed -i -e "s|^GID_MIN.*$|GID_MIN $GID_MIN|" /etc/login.defs
+
+EXPOSE 5000
+WORKDIR /var/www/mt
+CMD ["/usr/bin/starman", "--pid", "/var/run/mt.pid", "--listen", "0.0.0.0:5000", "--user", "docker", "--group", "docker", "/var/www/mt/mt.psgi"]
