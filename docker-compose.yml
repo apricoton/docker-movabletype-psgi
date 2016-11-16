@@ -8,7 +8,7 @@ services:
         UID_MIN: ${MOVABLETYPE_UID_MIN}
         GID_MIN: ${MOVABLETYPE_GID_MIN}
     ports:
-      - "${MOVABLETYPE_EXTERNAL_PORT}:80"
+      - "${MOVABLETYPE_WEB_PORT}:80"
     volumes:
       - ./src:/var/www
     env_file: .env
@@ -19,6 +19,7 @@ services:
       args:
         UID_MIN: ${MOVABLETYPE_UID_MIN}
         GID_MIN: ${MOVABLETYPE_GID_MIN}
+        APP_PORT: ${MOVABLETYPE_APP_PORT}
     volumes:
       - ./src:/var/www
     env_file: .env

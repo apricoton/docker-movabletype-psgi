@@ -10,6 +10,8 @@ ARG GID_MIN
 RUN sed -i -e "s|^UID_MIN.*$|UID_MIN $UID_MIN|" /etc/login.defs
 RUN sed -i -e "s|^GID_MIN.*$|GID_MIN $GID_MIN|" /etc/login.defs
 
-EXPOSE 5000
+ARG APP_PORT
+EXPOSE $APP_PORT
+
 WORKDIR /var/www/mt
-CMD ["/usr/bin/starman", "--pid", "/var/run/mt.pid", "--listen", "0.0.0.0:5000", "--user", "docker", "--group", "docker", "/var/www/mt/mt.psgi"]
+CMD ["/usr/bin/starman", "--pid", "/var/run/mt.pid", "--port", "${MOVABLETYPE_APP_PORT}", "--user", "docker", "--group", "docker", "/var/www/mt/mt.psgi"]
