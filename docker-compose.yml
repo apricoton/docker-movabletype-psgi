@@ -26,8 +26,11 @@ services:
     image: "mysql:5"
     volumes:
       - ./config/mysql:/etc/mysql/conf.d
+      - my_data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: movabletype
       MYSQL_DATABASE: movabletype
       MYSQL_USER: movabletype
       MYSQL_PASSWORD: movabletype
+volumes:
+  my_data: {}
