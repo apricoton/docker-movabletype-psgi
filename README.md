@@ -2,6 +2,9 @@
 ## 動作環境
 * Docker / Docker Compose
 
+## 立ち上がる環境
+* Apache 2.4 + PSGI + MySQL
+
 ## 使い方
 ### git clone 〜 docker-compose build
 ```bash
