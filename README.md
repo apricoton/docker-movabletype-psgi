@@ -25,7 +25,7 @@ docker-movabletype-psgi/
 
 ### mt-config.cgi
 ```perl
-CGIPath        /mt/
+CGIPath        http://localhost:8000/mt/
 StaticWebPath  /mt-static/
 StaticFilePath /var/www/html/mt-static
 
