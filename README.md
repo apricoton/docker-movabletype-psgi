@@ -1,6 +1,6 @@
 # Movable Type 開発環境
 ## 動作環境
-* Docker 1.13.0+ / Docker Compose
+* Docker 1.13.0+ / Docker Compose 1.10.0+
 
 ## 立ち上がる環境
 * Apache 2.4 + PSGI + MySQL
