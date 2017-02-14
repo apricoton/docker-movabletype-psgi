@@ -1,18 +1,16 @@
 FROM ubuntu:16.10
 RUN sed -i 's/\/archive.ubuntu.com/\/jp.archive.ubuntu.com/g' /etc/apt/sources.list; apt update; apt -y dist-upgrade
-RUN apt -y install build-essential libimager-perl libimage-magick-perl libdbd-mysql-perl libipc-run-perl libcrypt-dsa-perl libxml-sax-expatxs-perl libxml-sax-perl libarchive-zip-perl libcoro-perl libplack-middleware-debug-perl cpanminus starman
-RUN cpanm Mozilla::CA
-RUN cpanm Task::Plack
-RUN cpanm XMLRPC::Transport::HTTP::Plack
-
+RUN apt -y install build-essential libimager-perl libimage-magick-perl libdbi-perl libdbd-mysql-perl libipc-run-perl \
+    libcrypt-dsa-perl libxml-sax-expatxs-perl libxml-sax-perl libarchive-zip-perl libcoro-perl \
+    libplack-middleware-debug-perl cpanminus starman
+RUN cpanm Mozilla::CA Task::Plack XMLRPC::Transport::HTTP::Plack
 ARG UID_MIN
 ARG GID_MIN
 RUN sed -i -e "s|^UID_MIN.*$|UID_MIN $UID_MIN|" /etc/login.defs
 RUN sed -i -e "s|^GID_MIN.*$|GID_MIN $GID_MIN|" /etc/login.defs
 RUN useradd docker
-
 ARG APP_PORT
 EXPOSE $APP_PORT
-
-WORKDIR /var/www/mt
-CMD ["/usr/bin/starman", "--pid", "/var/run/mt.pid", "--port", "${MOVABLETYPE_APP_PORT}", "--user", "docker", "--group", "docker", "/var/www/mt/mt.psgi"]
+ARG WORK_DIR
+WORKDIR $WORK_DIR
+CMD ["/usr/bin/starman", "--pid", "/var/run/mt.pid", "--port", "${MOVABLETYPE_APP_PORT}", "--user", "docker", "--group", "docker", "mt.psgi"]
