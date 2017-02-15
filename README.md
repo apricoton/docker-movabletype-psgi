@@ -28,6 +28,7 @@ docker-movabletype-psgi/
 CGIPath        http://localhost:8000/mt/
 StaticWebPath  /mt-static/
 StaticFilePath /var/www/html/mt-static
+BaseSitePath   /var/www/html
 
 ObjectDriver DBI::mysql
 Database movabletype
