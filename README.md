@@ -11,7 +11,7 @@
 git clone git@github.com:apricoton/docker-movabletype-psgi.git
 cd docker-movabletype-psgi
 cp .env.example .env
-docker-compose build --no-cache
+docker-compose build
 ```
 
 ### Movable Type を下記のように設置
@@ -66,10 +66,8 @@ docker-compose restart mt
 
 #### .env
 ```bash
-MOVABLETYPE_UID_MIN=1000           # アプリケーションを動かす User ID
-MOVABLETYPE_GID_MIN=1000           # アプリケーションを動かす Group ID
-MOVABLETYPE_WEB_PORT=8000          # ウェブサーバの外向けのポート（ http://localhost:8000/ ）
-MOVABLETYPE_APP_PORT=5000          # アプリケーションサーバのポート
-MOVABLETYPE_DOC_ROOT=/var/www/html # ドキュメントルートのコンテナ内部パス（デフォルトでは ./src が /var/www になっている）
-MOVABLETYPE_WORK_DIR=/var/www/mt   # MTインストールディレクトリのコンテナ内部パス
+WEB_PORT=8000          # ウェブサーバの外向けのポート（ http://localhost:8000/ ）
+APP_PORT=5000          # アプリケーションサーバのポート
+DOC_ROOT=/var/www/html # ドキュメントルートのコンテナ内部パス（デフォルトでは ./src が /var/www になっている）
+WORK_DIR=/var/www/mt   # MTインストールディレクトリのコンテナ内部パス
 ```
